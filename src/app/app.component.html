@@ -1,11 +1,19 @@
 <mat-drawer-container class="mat-drawer-container" autosize>
   <mat-drawer #drawer class="sidenav" [opened]="true" mode="side">
     <div class="border">
-      <img class="logo" [src]="isDarkTheme ? '/assets/images/logo-white.png' : '/assets/images/logo-black.png'" alt="Logo">
+      <img
+        class="logo"
+        [src]="
+          isDarkTheme
+            ? '/assets/images/logo-white.png'
+            : '/assets/images/logo-black.png'
+        "
+        alt="Logo"
+      />
     </div>
     <ul>
-      <li><mat-icon>fact_check</mat-icon>Dashboard</li>
-      <li><mat-icon>perm_identity</mat-icon>User</li>
+      <li routerLink="/dashboard"><mat-icon>fact_check</mat-icon>Dashboard</li>
+      <li routerLink="/user"><mat-icon>perm_identity</mat-icon>User</li>
     </ul>
   </mat-drawer>
 
@@ -23,7 +31,8 @@
         </button>
       </mat-toolbar-row>
     </mat-toolbar>
+    <div class="router-container">
+      <router-outlet> </router-outlet>
+    </div>
   </div>
 </mat-drawer-container>
-
-<router-outlet />
