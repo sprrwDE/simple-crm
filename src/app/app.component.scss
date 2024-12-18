@@ -1,16 +1,21 @@
 .mat-drawer-container {
-    height: 100vh;
-    .toolbar {
-        display: flex;
-        justify-content: space-between;
-        .toolbar-inner {
-            display: flex;
-            align-items: center;
-        }
-    }
-}
-
-.sidenav {
+  height: 100vh;
+  .sidenav {
     width: 300px;
+    padding: 16px;
+    .logo {
+      width: 200px;
+      position: absolute;
+      left: calc(50% - 100px);
+      top: 6px;
+    }
+  }
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    .toolbar-inner {
+      display: flex;
+      align-items: center;
+    }
+  }
 }
-
