@@ -1,6 +1,12 @@
 <mat-drawer-container class="mat-drawer-container" autosize>
   <mat-drawer #drawer class="sidenav" [opened]="true" mode="side">
-    <img class="logo" [src]="isDarkTheme ? '/assets/images/logo-white.png' : '/assets/images/logo-black.png'" alt="Logo">
+    <div class="border">
+      <img class="logo" [src]="isDarkTheme ? '/assets/images/logo-white.png' : '/assets/images/logo-black.png'" alt="Logo">
+    </div>
+    <ul>
+      <li><mat-icon>fact_check</mat-icon>Dashboard</li>
+      <li><mat-icon>perm_identity</mat-icon>User</li>
+    </ul>
   </mat-drawer>
 
   <div class="sidenav-content">
