@@ -15,4 +15,24 @@ import {MatButtonModule} from '@angular/material/button';
 })
 export class AppComponent {
   title = 'simple-crm';
+  isDarkTheme: boolean = false;
+  
+  ngOnInit() {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    this.toggleDarkTheme(prefersDark.matches);
+  
+    prefersDark.addEventListener('change', (e) => {
+      this.toggleDarkTheme(e.matches);
+    });
+  }  
+
+  toggleDarkTheme(isDarkTheme: boolean) {
+    const body = document.body;
+    if (isDarkTheme) {
+      body.classList.add('dark-theme');
+    } else {
+      body.classList.remove('dark-theme');
+    }
+  }
+
 }

@@ -1,4 +1,139 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+// Basis-Styles
+html, body { 
+  height: 100%; 
+}
+
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+
+$rebeccapurple: (
+  50: #f3e8f7,
+  100: #d9c6e8,
+  200: #c1a3d9,
+  300: #a780c9,
+  400: #8e5dbb,
+  500: #663399, 
+  600: #5c2f8a,
+  700: #51287b,
+  800: #471f6c,
+  900: #391759,
+  A100: #d3b9f3,
+  A200: #a87ee6,
+  A400: #7d3ed8,
+  A700: #6622c6,
+  contrast: (
+    50: black,
+    100: black,
+    200: black,
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: black,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+);
+
+$accent-color: (
+  50: #f5f7e8,
+  100: #e3e8c6,
+  200: #d1d9a3,
+  300: #bfc980,
+  400: #adb85d,
+  500: #9ca83d, 
+  600: #889633,
+  700: #738429,
+  800: #5e711f,
+  900: #465d14,
+  A100: #c9ea8f,
+  A200: #a5d95e,
+  A400: #81c82d,
+  A700: #6fb51a,
+  contrast: (
+    50: black,
+    100: black,
+    200: black,
+    300: black,
+    400: black,
+    500: black,
+    600: black,
+    700: white,
+    800: white,
+    900: white,
+    A100: black,
+    A200: black,
+    A400: white,
+    A700: white,
+  )
+);
+
+// Warnfarbe (leicht rot-orange)
+$warn-color: (
+  50: #fbe9e7,
+  100: #ffccbc,
+  200: #ffab91,
+  300: #ff8a65,
+  400: #ff7043,
+  500: #ff5722, // Hauptwarnfarbe
+  600: #f4511e,
+  700: #e64a19,
+  800: #d84315,
+  900: #bf360c,
+  A100: #ff9e80,
+  A200: #ff6e40,
+  A400: #ff3d00,
+  A700: #dd2c00,
+  contrast: (
+    50: black,
+    100: black,
+    200: black,
+    300: black,
+    400: black,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: black,
+    A200: black,
+    A400: white,
+    A700: white,
+  )
+);
+
+$primary-palette: mat.define-palette($rebeccapurple);
+$accent-palette: mat.define-palette($accent-color, A200, A100, A400);
+$warn-palette: mat.define-palette($warn-color);
+
+$rebeccapurple-theme: mat.define-light-theme((
+  color: (
+    primary: $primary-palette,
+    accent: $accent-palette,
+    warn: $warn-palette,
+  ),
+  typography: mat.define-typography-config(),
+));
+
+$rebeccapurple-dark-theme: mat.define-dark-theme((
+  color: (
+    primary: $primary-palette,
+    accent: $accent-palette,
+    warn: $warn-palette,
+  ),
+  typography: mat.define-typography-config(),
+));
+
+body.dark-theme {
+  @include mat.all-component-themes($rebeccapurple-dark-theme);
+}
+
+@include mat.all-component-themes($rebeccapurple-theme);

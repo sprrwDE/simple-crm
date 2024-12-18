@@ -4,12 +4,15 @@
   </mat-drawer>
 
   <div class="example-sidenav-content">
-    <mat-toolbar color="primary">
+    <mat-toolbar class="stretch" color="primary">
       <mat-toolbar-row>
         <button mat-icon-button (click)="drawer.toggle()">
           <mat-icon>menu</mat-icon>
         </button>
         <span>Simple-CRM</span>
+
+        <button mat-button (click)="toggleDarkTheme(true)">Dark Theme</button>
+        <button mat-button (click)="toggleDarkTheme(false)">Light Theme</button>
       </mat-toolbar-row>
     </mat-toolbar>
   </div>
