@@ -9,10 +9,11 @@
         <button mat-icon-button (click)="drawer.toggle()">
           <mat-icon>menu</mat-icon>
         </button>
-        <span>Simple-CRM</span>
 
-        <button mat-button (click)="toggleDarkTheme(true)">Dark Theme</button>
-        <button mat-button (click)="toggleDarkTheme(false)">Light Theme</button>
+        <button mat-icon-button (click)="toggleDarkTheme()">
+          <mat-icon>{{ isDarkTheme ? "wb_sunny" : "nights_stay" }}</mat-icon>
+        </button>
+        <span>Simple-CRM</span>
       </mat-toolbar-row>
     </mat-toolbar>
   </div>
