@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog} from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -19,6 +19,8 @@ export class UserComponent {
   ngOnInit() {}
 
   openDialog() {
-    this.dialog.open(AddUserDialogComponent);
+    this.dialog.open(AddUserDialogComponent, {
+      // width: '640px',
+    });
   }
 }

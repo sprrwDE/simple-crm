@@ -1,8 +1,16 @@
-<h2 mat-dialog-title>Add User</h2>
-<mat-dialog-content>
-  Would you like to delete cat.jpeg?
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close>No</button>
-  <button mat-button mat-dialog-close cdkFocusInitial>Ok</button>
-</mat-dialog-actions>
+<div class="dialog-content-wrapper">
+  <h2 mat-dialog-title>Nutzer hinzufügen</h2>
+  <mat-dialog-content> Hier Nutzer hinzufügen</mat-dialog-content>
+
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Fill form field</mat-label>
+      <input matInput placeholder="Placeholder" />
+    </mat-form-field>
+  </p>
+
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Abbrechen</button>
+    <button mat-button mat-dialog-close cdkFocusInitial>Speichern</button>
+  </mat-dialog-actions>
+</div>
