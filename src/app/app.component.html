@@ -12,8 +12,18 @@
       />
     </div>
     <ul>
-      <li routerLink="/dashboard"><mat-icon>fact_check</mat-icon>Dashboard</li>
-      <li routerLink="/user"><mat-icon>perm_identity</mat-icon>User</li>
+      <li>
+        <a [routerLink]="'/dashboard'" routerLinkActive="active">
+          <mat-icon>fact_check</mat-icon>
+          Dashboard
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="'/user'" routerLinkActive="active">
+          <mat-icon>perm_identity</mat-icon>
+          User
+        </a>
+      </li>
     </ul>
   </mat-drawer>
 
@@ -32,7 +42,7 @@
       </mat-toolbar-row>
     </mat-toolbar>
     <div class="router-container">
-      <router-outlet> </router-outlet>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </mat-drawer-container>
