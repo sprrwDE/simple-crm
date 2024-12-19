@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
     MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,
-    CommonModule
+    CommonModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
