@@ -8,11 +8,17 @@
       display: flex;
       justify-content: center;
       height: 79px;
-
-      .logo {
+      a {
         width: 75%;
-        object-fit: scale-down;
+        display: flex;
+        align-items: center;
+        .logo {
+          width: 100%;
+          object-fit: scale-down;
+        }
       }
+
+
     }
 
     ul {
