@@ -7,6 +7,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { User } from '../../models/user.class';
 import { FormsModule } from '@angular/forms';
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-user-dialog',
@@ -18,6 +20,8 @@ import { Firestore, collection, addDoc } from '@angular/fire/firestore';
     MatFormFieldModule,
     MatDatepickerModule,
     FormsModule,
+    MatProgressBarModule,
+    CommonModule
   ],
   templateUrl: './add-user-dialog.component.html',
   styleUrl: './add-user-dialog.component.scss',
@@ -25,13 +29,24 @@ import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 export class AddUserDialogComponent {
   user: User = new User();
   birthDate!: Date;
+  loading: boolean = false;
 
-  constructor(private firestore: Firestore) {}
+  constructor(private firestore: Firestore) {
+  }
 
   async saveUser() {
     this.user.birthDate = this.birthDate.getTime();
     console.log(this.user);
-    const userCollection = collection(this.firestore, 'users');
-    await addDoc(userCollection, this.user.toJSON());
+    this.loading = true;
+  
+    try {
+      const userCollection = collection(this.firestore, 'users');
+      await addDoc(userCollection, this.user.toJSON());
+      console.log('User successfully saved.');
+    } catch (error) {
+      console.error('Error saving user: ', error);
+    } finally {
+      this.loading = false;
+    }
   }
-}
+  }

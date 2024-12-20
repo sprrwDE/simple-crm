@@ -32,6 +32,7 @@ const firebaseConfig = {
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
+
 export class AppComponent {
   firestore: Firestore = inject(Firestore);
   title: string = 'simple-crm';
