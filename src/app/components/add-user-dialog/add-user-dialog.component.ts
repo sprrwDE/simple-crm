@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { User } from '../../models/user.class';
 import { FormsModule } from '@angular/forms';
+import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-add-user-dialog',
@@ -16,20 +17,21 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     MatFormFieldModule,
     MatDatepickerModule,
-    FormsModule
+    FormsModule,
   ],
   templateUrl: './add-user-dialog.component.html',
   styleUrl: './add-user-dialog.component.scss',
 })
 export class AddUserDialogComponent {
-
-  user:User = new User()
+  user: User = new User();
   birthDate!: Date;
 
-  constructor() {}
+  constructor(private firestore: Firestore) {}
 
-  saveUser() {
-    this.user.birthDate = this.birthDate.getTime()
-    console.log(this.user)
+  async saveUser() {
+    this.user.birthDate = this.birthDate.getTime();
+    console.log(this.user);
+    const userCollection = collection(this.firestore, 'users');
+    await addDoc(userCollection, this.user.toJSON());
   }
 }

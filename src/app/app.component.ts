@@ -1,10 +1,22 @@
 import { Component } from '@angular/core';
+import { Firestore } from '@angular/fire/firestore';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { inject } from '@angular/core';
+import { initializeApp } from 'firebase/app';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAkAydBHzVSOUdyDG4yjvsUZHAP5TFss00",
+  authDomain: "simple-crm-28a05.firebaseapp.com",
+  projectId: "simple-crm-28a05",
+  storageBucket: "simple-crm-28a05.firebasestorage.app",
+  messagingSenderId: "245225813153",
+  appId: "1:245225813153:web:176f9946d7fb922bb62ce0"
+};
 
 @Component({
   selector: 'app-root',
@@ -16,16 +28,17 @@ import { CommonModule } from '@angular/common';
     MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,
-    CommonModule,
-  ],
+    CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+  firestore: Firestore = inject(Firestore);
   title: string = 'simple-crm';
   isDarkTheme: boolean = false;
 
   constructor() {
+    initializeApp(firebaseConfig);
     this.toggleDarkTheme();
   }
 
