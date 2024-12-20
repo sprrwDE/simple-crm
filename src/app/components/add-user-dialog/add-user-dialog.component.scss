@@ -25,3 +25,11 @@
 mat-form-field {
   width: 100% !important;
 }
+
+mat-form-field input:-webkit-autofill,
+mat-form-field input:-webkit-autofill:focus {
+    transition: background-color 600000s 0s, color 600000s 0s;
+}
+mat-form-field input:-webkit-autofill [data-autocompleted] {
+    background-color: transparent !important;
+}
