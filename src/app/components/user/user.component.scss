@@ -1,5 +1,32 @@
 .fab {
-    position: absolute;
-    bottom: 56px;
-    right: 56px;
+  position: absolute;
+  bottom: 56px;
+  right: 56px;
+}
+
+.user-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse !important;
+  tr {
+    margin-bottom: 8px;
+    padding: 4px !important;
+    border-radius: 20px !important;
+    border-bottom: 1px solid var(--mat-sidenav-content-background-color);
+    &:last-child{
+        border-bottom: 0px!important;
+    }
+    th {
+      text-align: left;
+      padding: 16px !important;
+    }
+    td {
+      padding: 16px !important;
+    }
+  }
 }
