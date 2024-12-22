@@ -1,17 +1,27 @@
-<mat-card class="user-detail-header" *ngIf="loaded">
-  <h1>{{user.firstName}} {{user.lastName}}</h1>
-  <img src="assets/images/avatar.png" class="avatar">
-</mat-card>
+<div class="wrapper" *ngIf="loaded">
+  <mat-card class="user-detail-header">
+    <h1>{{ user.firstName }} {{ user.lastName }}</h1>
+    <img src="assets/images/avatar.png" class="avatar" />
+  </mat-card>
 
-<mat-spinner *ngIf="!loaded" class="center"></mat-spinner>
+  <div class="inner">
+    <mat-card class="content1">
+      <h2>Adresse</h2>
+      <p>{{ user.street }}</p>
+      <p>{{ user.zip }} {{ user.city }}</p>
+    </mat-card>
 
-<button
-  mat-fab
-  color="primary"
-  class="fab"
-  matTooltip="Zur Übersicht"
-  matTooltipPosition="above"
-  [routerLink]="'/user/'"
->
-  <mat-icon>arrow_back</mat-icon>
-</button>
+    <mat-spinner *ngIf="!loaded" class="center"></mat-spinner>
+
+    <button
+      mat-fab
+      color="primary"
+      class="fab"
+      matTooltip="Zur Übersicht"
+      matTooltipPosition="above"
+      [routerLink]="'/user/'"
+    >
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+  </div>
+</div>
