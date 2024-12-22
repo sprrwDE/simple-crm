@@ -29,7 +29,7 @@ import { RouterModule } from '@angular/router';
     MatCardModule,
     CommonModule,
     RouterModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss',
@@ -38,7 +38,7 @@ export class UserComponent {
   firestore = inject(Firestore);
   allUsers: User[] = [];
   loaded: boolean = false;
-  unsubList;
+  unsubscribe;
 
   getUsers() {
     return collection(this.firestore, 'users');
@@ -46,7 +46,7 @@ export class UserComponent {
 
   constructor(public dialog: MatDialog) {
     try {
-      this.unsubList = onSnapshot(this.getUsers(), (list) => {
+      this.unsubscribe = onSnapshot(this.getUsers(), (list) => {
         this.allUsers = [];
         list.forEach((element) => {
           const rawData = element.data();
@@ -60,19 +60,11 @@ export class UserComponent {
       });
     } catch (error) {
       console.error('error', error);
-    } 
+    }
   }
 
   ngonDestroy() {
-    if (this.unsubList) this.unsubList();
-  }
-
-
-
-
-
-  test(user: any) {
-    console.log(user.id);
+    if (this.unsubscribe) this.unsubscribe();
   }
 
   openDialog() {
@@ -82,8 +74,8 @@ export class UserComponent {
       panelClass: 'custom-dialog',
     });
   }
-}
 
-// fragen warum array clearen -> richtiger weg?
-// warum kommen neue user nicht unten
-// warum in console.log nicht immer firstName das erste
+  logUserId(user: any) {
+    console.log(user.id);
+  }
+}
