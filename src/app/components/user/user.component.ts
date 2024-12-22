@@ -9,14 +9,11 @@ import { MatCardModule } from '@angular/material/card';
 import {
   Firestore,
   collection,
-  // collectionData,
   onSnapshot,
   doc,
 } from '@angular/fire/firestore';
 import { inject } from '@angular/core';
-// import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
-// import { query } from '@angular/fire/firestore';
 import { User } from '../../models/user.class';
 
 @Component({
@@ -37,7 +34,6 @@ export class UserComponent {
   firestore = inject(Firestore);
   allUsers: User[] = [];
   unsubList;
-  // unsubSingle;
 
   getUsers() {
     return collection(this.firestore, 'users');
@@ -45,28 +41,25 @@ export class UserComponent {
 
   constructor(public dialog: MatDialog) {
     this.unsubList = onSnapshot(this.getUsers(), (list) => {
+      this.allUsers = []
       list.forEach((element) => {
-        const userData = element.data() as User; 
-        this.allUsers.push(userData);
-        // console.log(this.allUsers);
-        // this.getSingleUser('users', element.id);
+        const rawData = element.data(); 
+        const user = new User({
+          ...rawData,
+          id: element.id, 
+        });
+        this.allUsers.push(user); 
       });
+      console.log(this.allUsers);
     });
-
-    /* 
-    this.unsubSingle = onSnapshot(this.getSingleUser("users", "0TOAS3I6O16HqkGAqYc8"), (element) => {
-      list.forEach(list => {
-        console.log(list)
-      })
-    }) */
   }
 
   ngonDestroy() {
     this.unsubList();
   }
 
-  getSingleUser(colId: string, docId: string) {
-    console.log(doc(collection(this.firestore, colId), docId));
+  test(user:any) {
+    console.log(user.id)
   }
 
   openDialog() {
@@ -77,3 +70,10 @@ export class UserComponent {
     });
   }
 }
+
+
+
+
+// fragen warum array clearen -> richtiger weg?
+// warum kommen neue user nicht unten
+// warum in console.log nicht immer firstName das erste

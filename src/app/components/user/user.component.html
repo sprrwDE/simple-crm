@@ -7,9 +7,9 @@
           <th>E-Mail</th>
           <th>City</th>
         </tr>
-        <tr *ngFor="let user of allUsers">
+        <tr *ngFor="let user of allUsers" (click)="test(user)">
           <td>{{ user.firstName}}</td>
-          <td>{{ user.lastName}}</td>
+          <td><a href="mailto:{{ user.email}}">{{ user.email}}</a></td>
           <td>{{ user.city}}</td>
         </tr>
       </table></mat-card-content

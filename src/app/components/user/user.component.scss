@@ -47,6 +47,9 @@ table {
       }
       &:last-child {
         border-radius: 0 4px 4px 0;
+      } 
+      > a {
+        color: var(--mat-sidenav-content-text-color);
       }
     }
   }
