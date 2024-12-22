@@ -6,6 +6,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
 import { MatCardModule } from '@angular/material/card';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {
   Firestore,
   collection,
@@ -15,6 +16,7 @@ import {
 import { inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { User } from '../../models/user.class';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -26,6 +28,8 @@ import { User } from '../../models/user.class';
     MatDialogModule,
     MatCardModule,
     CommonModule,
+    RouterModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss',
@@ -33,6 +37,7 @@ import { User } from '../../models/user.class';
 export class UserComponent {
   firestore = inject(Firestore);
   allUsers: User[] = [];
+  loading: boolean = false;
   unsubList;
 
   getUsers() {
@@ -40,26 +45,36 @@ export class UserComponent {
   }
 
   constructor(public dialog: MatDialog) {
-    this.unsubList = onSnapshot(this.getUsers(), (list) => {
-      this.allUsers = []
-      list.forEach((element) => {
-        const rawData = element.data(); 
-        const user = new User({
-          ...rawData,
-          id: element.id, 
+    try {
+      this.unsubList = onSnapshot(this.getUsers(), (list) => {
+        this.loading = true;
+        this.allUsers = [];
+        list.forEach((element) => {
+          const rawData = element.data();
+          const user = new User({
+            ...rawData,
+            id: element.id,
+          });
+          this.allUsers.push(user);
         });
-        this.allUsers.push(user); 
       });
-      console.log(this.allUsers);
-    });
+    } catch (error) {
+      console.error('error', error);
+    } finally {
+      this.loading = false;
+    }
   }
 
   ngonDestroy() {
-    this.unsubList();
+    if (this.unsubList) this.unsubList();
   }
 
-  test(user:any) {
-    console.log(user.id)
+
+
+
+
+  test(user: any) {
+    console.log(user.id);
   }
 
   openDialog() {
@@ -70,9 +85,6 @@ export class UserComponent {
     });
   }
 }
-
-
-
 
 // fragen warum array clearen -> richtiger weg?
 // warum kommen neue user nicht unten

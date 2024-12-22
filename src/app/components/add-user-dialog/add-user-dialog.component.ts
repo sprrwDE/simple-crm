@@ -36,7 +36,6 @@ export class AddUserDialogComponent {
 
   async saveUser() {
     this.user.birthDate = this.birthDate.getTime();
-    console.log(this.user);
     this.loading = true;
   
     try {

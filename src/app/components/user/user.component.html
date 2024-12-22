@@ -1,4 +1,4 @@
-<div class="user-wrapper">
+<div class="user-wrapper" *ngIf="loading">
   <mat-card>
     <mat-card-content>
       <table>
@@ -7,7 +7,7 @@
           <th>E-Mail</th>
           <th>City</th>
         </tr>
-        <tr *ngFor="let user of allUsers" (click)="test(user)">
+        <tr *ngFor="let user of allUsers" (click)="test(user)" [routerLink]="'/user/' + user.id">
           <td>{{ user.firstName}}</td>
           <td><a href="mailto:{{ user.email}}">{{ user.email}}</a></td>
           <td>{{ user.city}}</td>
@@ -16,6 +16,8 @@
     >
   </mat-card>
 </div>
+
+<mat-spinner *ngIf="!loading" class="center"></mat-spinner>
 
 <button
   mat-fab
@@ -27,3 +29,4 @@
 >
   <mat-icon>add</mat-icon>
 </button>
+
