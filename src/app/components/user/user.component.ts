@@ -9,14 +9,14 @@ import { MatCardModule } from '@angular/material/card';
 import {
   Firestore,
   collection,
-  collectionData,
+  // collectionData,
   onSnapshot,
   doc,
 } from '@angular/fire/firestore';
 import { inject } from '@angular/core';
-import { Observable } from 'rxjs';
+// import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { query } from '@angular/fire/firestore';
+// import { query } from '@angular/fire/firestore';
 import { User } from '../../models/user.class';
 
 @Component({
@@ -48,7 +48,7 @@ export class UserComponent {
       list.forEach((element) => {
         const userData = element.data() as User; 
         this.allUsers.push(userData);
-        console.log(this.allUsers);
+        // console.log(this.allUsers);
         // this.getSingleUser('users', element.id);
       });
     });

@@ -7,24 +7,15 @@
           <th>E-Mail</th>
           <th>City</th>
         </tr>
-        <tr>
-          <td>Name</td>
-          <td>Email</td>
-          <td>Stadt</td>
-        </tr>
-        <tr>
-          <td>Name</td>
-          <td>Email</td>
-          <td>Stadt</td>
+        <tr *ngFor="let user of allUsers">
+          <td>{{ user.firstName}}</td>
+          <td>{{ user.lastName}}</td>
+          <td>{{ user.city}}</td>
         </tr>
       </table></mat-card-content
     >
   </mat-card>
 </div>
-
-<!-- <div *ngFor="let user of users$ | async">
-  {{ user["name"] | json }}
-</div>   -->
 
 <button
   mat-fab
