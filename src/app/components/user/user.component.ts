@@ -37,7 +37,7 @@ import { RouterModule } from '@angular/router';
 export class UserComponent {
   firestore = inject(Firestore);
   allUsers: User[] = [];
-  loading: boolean = false;
+  loaded: boolean = false;
   unsubList;
 
   getUsers() {
@@ -47,7 +47,6 @@ export class UserComponent {
   constructor(public dialog: MatDialog) {
     try {
       this.unsubList = onSnapshot(this.getUsers(), (list) => {
-        this.loading = true;
         this.allUsers = [];
         list.forEach((element) => {
           const rawData = element.data();
@@ -56,13 +55,12 @@ export class UserComponent {
             id: element.id,
           });
           this.allUsers.push(user);
+          this.loaded = true;
         });
       });
     } catch (error) {
       console.error('error', error);
-    } finally {
-      this.loading = false;
-    }
+    } 
   }
 
   ngonDestroy() {
