@@ -35,7 +35,7 @@ import { RouterModule } from '@angular/router';
   styleUrl: './user.component.scss',
 })
 export class UserComponent {
-  firestore = inject(Firestore);
+  firestore:Firestore = inject(Firestore);
   allUsers: User[] = [];
   loaded: boolean = false;
   unsubscribe;
