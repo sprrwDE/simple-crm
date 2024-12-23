@@ -82,10 +82,12 @@ export class UserDetailComponent {
   }
 
   openEditDialog() {
-    this.dialog.open(EditUserDialogComponent, {
+    let dialog = this.dialog.open(EditUserDialogComponent, {
           width: '100%',
           maxWidth: '560px',
           panelClass: 'custom-dialog',
         });
+    
+    dialog.componentInstance.user = this.user;
   }
 }

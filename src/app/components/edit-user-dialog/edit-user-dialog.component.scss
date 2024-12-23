@@ -1,0 +1,43 @@
+.dialog-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center;
+    width: 100% !important;
+    height: 100% !important;
+    position: relative;
+    > h2 {
+      text-align: center;
+    }
+    > .input-wrapper {
+      display: flex;
+      flex-direction: row;
+      gap: 8px;
+      width: 100%;
+    }
+    .progress {
+      position: absolute;
+      bottom: 0px;
+      z-index: 10000;
+    }
+  }
+  
+  .custom-dialog {
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  
+  mat-form-field {
+    width: 100% !important;
+  }
+  
+  mat-form-field input:-webkit-autofill,
+  mat-form-field input:-webkit-autofill:focus {
+      transition: background-color 600000s 0s, color 600000s 0s;
+  }
+  
+  mat-form-field input:-webkit-autofill [data-autocompleted] {
+      background-color: transparent !important;
+  }
+  
