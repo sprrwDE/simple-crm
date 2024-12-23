@@ -75,7 +75,4 @@ export class UserComponent {
     });
   }
 
-  logUserId(user: any) {
-    console.log(user.id);
-  }
 }

@@ -36,13 +36,12 @@ export class AddUserDialogComponent {
   async saveUser() {
     this.loading = true;
     if (this.user.birthDate) {
-      this.user.birthDate = this.birthDate.getTime();
+      this.user.birthDate = this.birthDate.getDate(); 
     }
 
     try {
       const userCollection = collection(this.firestore, 'users');
       await addDoc(userCollection, this.user.toJSON());
-      console.log('User successfully saved.');
     } catch (error) {
       console.error('Error saving user: ', error);
     } finally {

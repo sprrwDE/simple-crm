@@ -42,6 +42,11 @@
     > .content1 {
       width: 100%;
       padding: 40px;
+      >.menu-icon{
+        position: absolute;
+        top: 56px;
+        right: 56px;
+      }
     }
   } 
 }

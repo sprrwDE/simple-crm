@@ -16,6 +16,10 @@ import { Subscription } from 'rxjs';
 import { User } from '../../models/user.class';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { EditUserDialogComponent } from '../edit-user-dialog/edit-user-dialog.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import {MatMenuModule} from '@angular/material/menu';
+
 
 @Component({
   selector: 'app-user-detail',
@@ -27,25 +31,30 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     RouterModule,
     MatCardModule,
     CommonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    MatMenuModule
   ],
   templateUrl: './user-detail.component.html',
   styleUrl: './user-detail.component.scss',
 })
 export class UserDetailComponent {
-  unsubscribe;
+  unsubscribe:any;
   routeSub: Subscription;
   firestore: Firestore = inject(Firestore);
   id:string = '';
   user!:User;
   loaded: boolean = false;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, public dialog: MatDialog) {
     this.routeSub = this.route.params.subscribe(params => {
       this.id = params['id']
-      console.log(this.id)
     });
 
+    this.getData();
+  }
+
+  getData() {
     try {
       this.unsubscribe = onSnapshot(
         this.getSingleUser(this.id),
@@ -70,5 +79,13 @@ export class UserDetailComponent {
 
   getSingleUser(docId: string) {
     return doc(collection(this.firestore, 'users'), docId);
+  }
+
+  openEditDialog() {
+    this.dialog.open(EditUserDialogComponent, {
+          width: '100%',
+          maxWidth: '560px',
+          panelClass: 'custom-dialog',
+        });
   }
 }

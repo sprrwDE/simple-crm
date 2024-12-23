@@ -9,6 +9,20 @@
       <h2>Adresse</h2>
       <p>{{ user.street }}</p>
       <p>{{ user.zip }} {{ user.city }}</p>
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" class="menu-icon">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="openEditDialog()">
+          <mat-icon>edit</mat-icon>
+          <span>Edit User</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>delete</mat-icon>
+          <span>Delete User</span>
+        </button>
+      </mat-menu>
+      
     </mat-card>
 
     <mat-spinner *ngIf="!loaded" class="center"></mat-spinner>
