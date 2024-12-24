@@ -18,8 +18,7 @@ import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { EditUserDialogComponent } from '../edit-user-dialog/edit-user-dialog.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import {MatMenuModule} from '@angular/material/menu';
-
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-user-detail',
@@ -33,39 +32,35 @@ import {MatMenuModule} from '@angular/material/menu';
     CommonModule,
     MatProgressSpinnerModule,
     MatDialogModule,
-    MatMenuModule
+    MatMenuModule,
   ],
   templateUrl: './user-detail.component.html',
   styleUrl: './user-detail.component.scss',
 })
 export class UserDetailComponent {
-  unsubscribe:any;
+  unsubscribe: any;
   routeSub: Subscription;
   firestore: Firestore = inject(Firestore);
-  id:string = '';
-  user!:User;
+  id: string = '';
+  user!: User;
   loaded: boolean = false;
 
   constructor(private route: ActivatedRoute, public dialog: MatDialog) {
-    this.routeSub = this.route.params.subscribe(params => {
-      this.id = params['id']
+    this.routeSub = this.route.params.subscribe((params) => {
+      this.id = params['id'];
     });
-
     this.getData();
   }
 
   getData() {
     try {
-      this.unsubscribe = onSnapshot(
-        this.getSingleUser(this.id),
-        (element) => {
-          let userData = element.data()
-          this.user = new User({
-            ...userData
-          })
-          console.log(this.user);
-        }
-      );
+       this.unsubscribe = onSnapshot(this.getSingleUser(this.id), (element) => {
+        let userData = element.data();
+        this.user = new User({
+          ...userData,
+          id: this.id
+        });
+      });
     } catch (error) {
       console.log('error', error);
     } finally {
@@ -82,12 +77,12 @@ export class UserDetailComponent {
   }
 
   openEditDialog() {
-    let dialog = this.dialog.open(EditUserDialogComponent, {
-          width: '100%',
-          maxWidth: '560px',
-          panelClass: 'custom-dialog',
-        });
-    
-    dialog.componentInstance.user = this.user;
+    const dialog = this.dialog.open(EditUserDialogComponent, {
+      width: '100%',
+      maxWidth: '560px',
+      panelClass: 'custom-dialog',
+    });
+
+    dialog.componentInstance.user = new User(this.user.toJSON());
   }
 }
