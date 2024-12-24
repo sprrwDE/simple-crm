@@ -18,35 +18,43 @@ import {
 @Component({
   selector: 'app-edit-user-dialog',
   standalone: true,
-  imports: [MatDialogModule,
+  imports: [
+    MatDialogModule,
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
     MatDatepickerModule,
     FormsModule,
     MatProgressBarModule,
-    CommonModule
+    CommonModule,
   ],
   templateUrl: './edit-user-dialog.component.html',
-  styleUrl: './edit-user-dialog.component.scss'
+  styleUrl: './edit-user-dialog.component.scss',
 })
 export class EditUserDialogComponent {
+  user: User = new User();
+  birthDate!: Date;
+  loading: boolean = false;
 
-    user: User = new User();
-    birthDate!: Date;
-    loading: boolean = false;
+  constructor(private firestore: Firestore) {
+    console.log(this.user.id);
+  }
 
-    constructor(private firestore: Firestore) {
-      console.log(this.user.id)
-    }
+  getSingleUser() {
+    return doc(collection(this.firestore, 'users'), this.user.id);
+  }
 
-    getSingleUser() {
-      return doc(collection(this.firestore, 'users'), this.user.id);
-    }
+  async editUser() {
+    this.loading = true;
+    await updateDoc(this.getSingleUser(), this.user.toJSON())
+      .catch((err) => {
+        console.error(err);
+      })
+      .then(() => {
+        this.loading = false;
+      });
+  }
 
-    async editUser() {
-      await updateDoc(this.getSingleUser(), this.user.toJSON())
-    }
 }
 
 // Wie Autofill Datum?

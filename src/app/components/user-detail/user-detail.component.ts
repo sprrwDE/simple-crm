@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { RouterModule } from '@angular/router';
+import { Route, Router, RouterModule } from '@angular/router'; // Router importiert
 import { MatCardModule } from '@angular/material/card';
 import { inject } from '@angular/core';
 import {
@@ -10,6 +10,7 @@ import {
   collection,
   onSnapshot,
   doc,
+  deleteDoc,
 } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -45,7 +46,10 @@ export class UserDetailComponent {
   user!: User;
   loaded: boolean = false;
 
-  constructor(private route: ActivatedRoute, public dialog: MatDialog) {
+  constructor(
+    private route: ActivatedRoute, 
+    public dialog: MatDialog, 
+  ) {
     this.routeSub = this.route.params.subscribe((params) => {
       this.id = params['id'];
     });
@@ -54,7 +58,7 @@ export class UserDetailComponent {
 
   getData() {
     try {
-       this.unsubscribe = onSnapshot(this.getSingleUser(this.id), (element) => {
+      this.unsubscribe = onSnapshot(this.getSingleUser(this.id), (element) => {
         let userData = element.data();
         this.user = new User({
           ...userData,
@@ -84,5 +88,15 @@ export class UserDetailComponent {
     });
 
     dialog.componentInstance.user = new User(this.user.toJSON());
+  }
+
+  async deleteUser() {
+    await deleteDoc(this.getSingleUser(this.user.id))
+      .catch((err) => {
+        console.error(err);
+      })
+      .then(() => {
+        console.log('Document successfully deleted!');
+      });
   }
 }
