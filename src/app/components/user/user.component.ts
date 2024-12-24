@@ -10,8 +10,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {
   Firestore,
   collection,
-  onSnapshot,
-  doc,
+  onSnapshot
 } from '@angular/fire/firestore';
 import { inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -48,7 +47,7 @@ export class UserComponent {
     try {
       this.unsubscribe = onSnapshot(this.getUsers(), (list) => {
         this.allUsers = [];
-        list.forEach((element) => {
+        list.docs.forEach((element) => {
           const rawData = element.data();
           const user = new User({
             ...rawData,
@@ -63,7 +62,7 @@ export class UserComponent {
     }
   }
 
-  ngonDestroy() {
+  ngOnDestroy() {
     if (this.unsubscribe) this.unsubscribe();
   }
 
