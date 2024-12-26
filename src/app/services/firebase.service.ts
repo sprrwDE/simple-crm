@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, onSnapshot } from '@angular/fire/firestore';
+import { Firestore, collection, onSnapshot, doc } from '@angular/fire/firestore';
 import { DocumentData } from 'firebase/firestore';
 import { BehaviorSubject } from 'rxjs';
 
@@ -10,15 +10,14 @@ export class FirebaseService {
   private fetchedCollectionSubject = new BehaviorSubject<DocumentData[]>([]);
   fetchedCollection$ = this.fetchedCollectionSubject.asObservable();
 
-  constructor(public firestore: Firestore) {}
+  private fetchedSingleSubject = new BehaviorSubject<DocumentData>({});
+  fetchedSingleData$ = this.fetchedSingleSubject.asObservable();
 
-  getCollection(db: string) {
-    return collection(this.firestore, db);
-  }
+  constructor(public firestore: Firestore) {}
 
   getData(db: string) {
     try {
-      onSnapshot(this.getCollection(db), (list) => {
+      onSnapshot(collection(this.firestore, db), (list) => {
         const fetchedData: DocumentData[] = [];
         list.docs.forEach((element) => {
           const rawData = {
@@ -32,5 +31,14 @@ export class FirebaseService {
     } catch (error) {
       console.error('Fehler beim Abrufen der Daten:', error);
     }
+  }
+
+  getSingleDoc(db: string, id: string) {
+    onSnapshot(doc(this.firestore, db, id), (element) => {
+      const fetchedData: DocumentData = {...element.data()};
+      this.fetchedSingleSubject.next(fetchedData);
+
+      console.log('uff', fetchedData);
+    });
   }
 }

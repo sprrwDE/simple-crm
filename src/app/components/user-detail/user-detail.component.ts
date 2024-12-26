@@ -7,19 +7,16 @@ import { MatCardModule } from '@angular/material/card';
 import { inject } from '@angular/core';
 import {
   Firestore,
-  collection,
-  onSnapshot,
-  doc,
-  deleteDoc,
 } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { User } from '../../models/user.class';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { EditUserDialogComponent } from '../edit-user-dialog/edit-user-dialog.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
+import { FirebaseService } from '../../services/firebase.service';
 
 @Component({
   selector: 'app-user-detail',
@@ -45,39 +42,25 @@ export class UserDetailComponent {
   id: string = '';
   user!: User;
   loaded: boolean = false;
+  fetchedSingleData$: Observable<any>
 
   constructor(
     private route: ActivatedRoute, 
     public dialog: MatDialog, 
+    public service: FirebaseService
   ) {
     this.routeSub = this.route.params.subscribe((params) => {
       this.id = params['id'];
     });
-    this.getData();
+    this.fetchedSingleData$ = this.service.fetchedSingleData$
+    service.getSingleDoc('users', this.id)
   }
 
-  getData() {
-    try {
-      this.unsubscribe = onSnapshot(this.getSingleUser(this.id), (element) => {
-        let userData = element.data();
-        this.user = new User({
-          ...userData,
-          id: this.id
-        });
-      });
-    } catch (error) {
-      console.log('error', error);
-    } finally {
-      this.loaded = true;
-    }
-  }
-
-  ngOnDestroy() {
-    this.routeSub.unsubscribe();
-  }
-
-  getSingleUser(docId: string) {
-    return doc(collection(this.firestore, 'users'), docId);
+  ngOnInit() {
+    this.fetchedSingleData$.subscribe((data) => {
+      this.user = new User(data)
+      console.log('blaaaasdadsada', this.user)
+    })
   }
 
   openEditDialog() {
@@ -90,7 +73,7 @@ export class UserDetailComponent {
     dialog.componentInstance.user = new User(this.user.toJSON());
   }
 
-  async deleteUser() {
+/*   async deleteUser() {
     await deleteDoc(this.getSingleUser(this.user.id))
       .catch((err) => {
         console.error(err);
@@ -98,5 +81,5 @@ export class UserDetailComponent {
       .then(() => {
         console.log('Document successfully deleted!');
       });
-  }
+  } */
 }
