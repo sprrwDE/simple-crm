@@ -77,7 +77,6 @@ export class FirebaseService {
 
   async editDoc(db: string, id: string, data: any) {
     this.loaded = false;
-    console.log('Collection:', db, 'ID:', id);
     await updateDoc(doc(collection(this.firestore, db), id), data.toJSON())
       .catch((err) => {
         console.error(err);

@@ -51,9 +51,7 @@ export class UserDetailComponent {
 
   ngOnInit() {
     this.fetchedSingleData$.subscribe((data: User) => {
-      console.log('data', data);
       this.user = new User(data);
-      console.log('user', this.user);
     });
   }
 
@@ -69,9 +67,7 @@ export class UserDetailComponent {
       maxWidth: '560px',
       panelClass: 'custom-dialog',
     });
-    console.log('user in detail', this.user);
     dialog.componentInstance.user = new User(this.user.toJSON());
     dialog.componentInstance.id = this.id;
-    console.log('nach hinzufügen in component', this.user);
   }
 }

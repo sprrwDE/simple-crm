@@ -33,14 +33,5 @@ export class EditUserDialogComponent {
   loading: boolean = false;
 
   constructor(public service: FirebaseService) {
-    console.log('dialog user', this.user);
-    console.log('dialog id', this.id);
-  }
-
-  async editUser() {
-    console.log('user in editcomponent', this.user)
-    await this.service.editDoc('users', this.id, this.user);
   }
 }
-
-// Wie Autofill Datum?
