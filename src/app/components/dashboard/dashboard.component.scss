@@ -4,3 +4,30 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
+
+  .wrapper-outter {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: calc(100vh - 160px);
+    align-items: center;
+    justify-content: center;
+    >.wrapper-inner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      gap: 16px;
+      >mat-card {
+        padding: 16px;
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        .hl {
+          font-size: 120px;
+        }
+      }
+    }
+  }

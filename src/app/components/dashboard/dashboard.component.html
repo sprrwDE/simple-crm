@@ -1,3 +1,21 @@
-<p *ngIf="service.loaded">Derzeit sind {{userCount}} Nutzer angelegt!</p>
+<div class="wrapper-outter" *ngIf="service.loaded">
+  <div class="wrapper-inner">
+    <mat-card>
+      <span>Derzeit sind</span>
+      <span class="hl">{{ userCount }}</span>
+      <span>Nutzer angelegt</span>
+    </mat-card>
+    <mat-card>
+      <span>Derzeit sind</span>
+      <span class="hl">{{ userCount }}</span>
+      <span>Nutzer angelegt</span>
+    </mat-card>
+    <mat-card>
+      <span>Derzeit sind</span>
+      <span class="hl">{{ userCount }}</span>
+      <span>Nutzer angelegt</span>
+    </mat-card>
+  </div>
+</div>
 
 <mat-spinner *ngIf="!service.loaded" class="center"></mat-spinner>
