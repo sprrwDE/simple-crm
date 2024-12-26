@@ -3,6 +3,7 @@ import { collection, Firestore, onSnapshot } from '@angular/fire/firestore';
 import { User } from '../../models/user.class';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { FirebaseService } from '../../services/firebase.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,7 +19,8 @@ export class DashboardComponent {
   userCount: number = 0;
   loaded: boolean = false;
 
-  constructor(private firestore: Firestore) {
+  constructor(private firestore: Firestore, private service: FirebaseService) {
+    service.getData('users')
     try {
       this.unsubscribe = onSnapshot(this.getUsers(), (snapshot) => {
         this.allUsers = []; 

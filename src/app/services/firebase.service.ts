@@ -10,8 +10,7 @@ export class FirebaseService {
   private fetchedCollectionSubject = new BehaviorSubject<DocumentData[]>([]);
   fetchedCollection$ = this.fetchedCollectionSubject.asObservable();
 
-  constructor(public firestore: Firestore) {
-  }
+  constructor(public firestore: Firestore) {}
 
   getCollection(db: string) {
     return collection(this.firestore, db);
@@ -22,9 +21,13 @@ export class FirebaseService {
       onSnapshot(this.getCollection(db), (list) => {
         const fetchedData: DocumentData[] = [];
         list.docs.forEach((element) => {
-          const rawData = element.data();
+          const rawData = {
+            ...element.data(),
+            id: element.id,
+          };
           fetchedData.push(rawData);
         });
+        console.log('blubbbbbb', fetchedData)
         this.fetchedCollectionSubject.next(fetchedData);
       });
     } catch (error) {
