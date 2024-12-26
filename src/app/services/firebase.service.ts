@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, onSnapshot, doc } from '@angular/fire/firestore';
+import { Firestore, collection, onSnapshot, doc, deleteDoc } from '@angular/fire/firestore';
 import { DocumentData } from 'firebase/firestore';
 import { BehaviorSubject } from 'rxjs';
 
@@ -40,5 +40,15 @@ export class FirebaseService {
 
       console.log('uff', fetchedData);
     });
+  }
+
+  async deleteUser(db: string, id: string) {
+    try {
+      const docRef = doc(this.firestore, db, id);
+      await deleteDoc(docRef);
+      console.log('Document successfully deleted!');
+    } catch (err) {
+      console.error('Error deleting document:', err);
+    }
   }
 }

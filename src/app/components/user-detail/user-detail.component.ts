@@ -72,14 +72,4 @@ export class UserDetailComponent {
 
     dialog.componentInstance.user = new User(this.user.toJSON());
   }
-
-/*   async deleteUser() {
-    await deleteDoc(this.getSingleUser(this.user.id))
-      .catch((err) => {
-        console.error(err);
-      })
-      .then(() => {
-        console.log('Document successfully deleted!');
-      });
-  } */
 }
