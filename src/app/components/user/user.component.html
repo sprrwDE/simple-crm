@@ -1,4 +1,4 @@
-<div class="user-wrapper" *ngIf="loaded">
+<div class="user-wrapper" *ngIf="service.loaded">
   <mat-card>
     <mat-card-content>
       <table>
@@ -17,7 +17,7 @@
   </mat-card>
 </div>
 
-<mat-spinner *ngIf="!loaded" class="center"></mat-spinner>
+<mat-spinner *ngIf="!service.loaded" class="center"></mat-spinner>
 
 <button
   mat-fab

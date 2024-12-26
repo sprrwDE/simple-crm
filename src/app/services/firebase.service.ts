@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, onSnapshot, doc, deleteDoc } from '@angular/fire/firestore';
+import {
+  Firestore,
+  collection,
+  onSnapshot,
+  doc,
+  deleteDoc,
+} from '@angular/fire/firestore';
 import { DocumentData } from 'firebase/firestore';
 import { BehaviorSubject } from 'rxjs';
 
@@ -13,9 +19,12 @@ export class FirebaseService {
   private fetchedSingleSubject = new BehaviorSubject<DocumentData>({});
   fetchedSingleData$ = this.fetchedSingleSubject.asObservable();
 
+  public loaded: boolean = false;
+
   constructor(public firestore: Firestore) {}
 
   getData(db: string) {
+    this.loaded = false;
     try {
       onSnapshot(collection(this.firestore, db), (list) => {
         const fetchedData: DocumentData[] = [];
@@ -27,6 +36,7 @@ export class FirebaseService {
           fetchedData.push(rawData);
         });
         this.fetchedCollectionSubject.next(fetchedData);
+        this.loaded = true;
       });
     } catch (error) {
       console.error('Fehler beim Abrufen der Daten:', error);
@@ -34,15 +44,16 @@ export class FirebaseService {
   }
 
   getSingleDoc(db: string, id: string) {
+    this.loaded = false;
     onSnapshot(doc(this.firestore, db, id), (element) => {
-      const fetchedData: DocumentData = {...element.data()};
+      const fetchedData: DocumentData = { ...element.data() };
       this.fetchedSingleSubject.next(fetchedData);
-
       console.log('uff', fetchedData);
+      this.loaded = true;
     });
   }
 
-  async deleteUser(db: string, id: string) {
+  async deleteSingleDoc(db: string, id: string) {
     try {
       const docRef = doc(this.firestore, db, id);
       await deleteDoc(docRef);

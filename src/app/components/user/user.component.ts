@@ -32,9 +32,8 @@ import { FirebaseService } from '../../services/firebase.service';
 export class UserComponent {
   fetchedCollection$: Observable<any[]>;
   allUsers: User[] = [];
-  loaded: boolean = false;
 
-  constructor(public dialog: MatDialog, private service: FirebaseService) {
+  constructor(public dialog: MatDialog, public service: FirebaseService) {
     this.fetchedCollection$ = this.service.fetchedCollection$;
     service.getData('users');
   }
@@ -47,7 +46,7 @@ export class UserComponent {
             ...rawData,
           })
       );
-      this.allUsers.length > 0 ? (this.loaded = true) : (this.loaded = false);
+      // this.allUsers.length > 0 ? (this.loaded = true) : (this.loaded = false);
       // Workaround -> bad, umschreiben
       console.log('hello', this.allUsers);
     });

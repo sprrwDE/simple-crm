@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper" *ngIf="service.loaded">
   <mat-card class="user-detail-header">
     <h1>{{ user.firstName }} {{ user.lastName }}</h1>
     <img src="assets/images/avatar.png" class="avatar" />
@@ -17,7 +17,7 @@
           <mat-icon>edit</mat-icon>
           <span>Edit User</span>
         </button>
-        <button mat-menu-item (click)="service.deleteUser('users', this.id)" [routerLink]="'/user/'">
+        <button mat-menu-item (click)="service.deleteSingleDoc('users', this.id)" [routerLink]="'/user/'">
           <mat-icon>delete</mat-icon>
           <span>Delete User</span>
         </button>
@@ -25,7 +25,7 @@
       
     </mat-card>
 
- <!--    <mat-spinner *ngIf="!loaded" class="center"></mat-spinner> -->
+<mat-spinner *ngIf="!service.loaded" class="center"></mat-spinner>
 
     <button
       mat-fab

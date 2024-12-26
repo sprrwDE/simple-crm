@@ -16,10 +16,9 @@ import { User } from '../../models/user.class';
 export class DashboardComponent implements OnInit {
   fetchedCollection$: Observable<any[]>;
   userCount: number = 0;
-  loaded: boolean = false;
   allUsers: User[] = [];
 
-  constructor(private service: FirebaseService) {
+  constructor(public service: FirebaseService) {
     service.getData('users');
     this.fetchedCollection$ = this.service.fetchedCollection$;
   }
@@ -32,8 +31,6 @@ export class DashboardComponent implements OnInit {
             ...rawData,
           })
       );
-      this.allUsers.length > 0 ? (this.loaded = true) : (this.loaded = false);
-      // Workaround -> bad, umschreiben
       this.userCount = this.allUsers.length;
     });
   }
