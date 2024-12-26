@@ -8,12 +8,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { User } from '../../models/user.class';
-import {
-  Firestore,
-  collection,
-  doc,
-  updateDoc
-} from '@angular/fire/firestore';
 import { FirebaseService } from '../../services/firebase.service';
 
 @Component({
@@ -34,29 +28,19 @@ import { FirebaseService } from '../../services/firebase.service';
 })
 export class EditUserDialogComponent {
   user!: User;
-  userId!: string;
+  id!: string;
   birthDate!: Date;
   loading: boolean = false;
 
-  constructor(private firestore: Firestore, public service: FirebaseService) {
-    console.log('user im dialog', this.user);
-  }
-
-/*   getSingleUser() {
-    return doc(collection(this.firestore, 'users'), this.user.id);
+  constructor(public service: FirebaseService) {
+    console.log('dialog user', this.user);
+    console.log('dialog id', this.id);
   }
 
   async editUser() {
-    this.loading = true;
-    await updateDoc(this.getSingleUser(), this.user.toJSON())
-      .catch((err) => {
-        console.error(err);
-      })
-      .then(() => {
-        this.loading = false;
-      });
-  } */
-
+    console.log('user in editcomponent', this.user)
+    await this.service.editDoc('users', this.id, this.user);
+  }
 }
 
 // Wie Autofill Datum?

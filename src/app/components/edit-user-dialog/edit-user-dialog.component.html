@@ -46,7 +46,7 @@
   
       <mat-dialog-actions>
         <button [disabled]='!service.loaded' mat-button mat-dialog-close>Abbrechen</button>
-        <button [disabled]='!service.loaded' (click)="service.editDoc('users', userId, user)" mat-button mat-dialog-close cdkFocusInitial>Speichern</button>
+        <button [disabled]='!service.loaded' (click)="editUser()" mat-button mat-dialog-close cdkFocusInitial>Speichern</button>
       </mat-dialog-actions>
     </mat-dialog-content>
     <mat-progress-bar *ngIf="!service.loaded" class="progress" mode="indeterminate"></mat-progress-bar>

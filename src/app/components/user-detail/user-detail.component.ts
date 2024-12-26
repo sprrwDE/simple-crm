@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { RouterModule } from '@angular/router'; // Router importiert
+import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
@@ -35,23 +35,26 @@ export class UserDetailComponent {
   routeSub: Subscription;
   id: string = '';
   user!: User;
-  fetchedSingleData$: Observable<any>
+  fetchedSingleData$: Observable<any>;
 
   constructor(
-    private route: ActivatedRoute, public dialog: MatDialog, public service: FirebaseService) {
+    private route: ActivatedRoute,
+    public dialog: MatDialog,
+    public service: FirebaseService
+  ) {
     this.routeSub = this.route.params.subscribe((params) => {
       this.id = params['id'];
     });
-    this.fetchedSingleData$ = this.service.fetchedSingleData$
-    service.getSingleDoc('users', this.id)
+    this.fetchedSingleData$ = this.service.fetchedSingleData$;
+    service.getSingleDoc('users', this.id);
   }
 
   ngOnInit() {
-    this.fetchedSingleData$.subscribe((data) => {
-      console.log('data', data)
-      this.user = new User(data)
-      console.log('user', this.user)
-    })
+    this.fetchedSingleData$.subscribe((data: User) => {
+      console.log('data', data);
+      this.user = new User(data);
+      console.log('user', this.user);
+    });
   }
 
   ngOnDestroy() {
@@ -66,7 +69,9 @@ export class UserDetailComponent {
       maxWidth: '560px',
       panelClass: 'custom-dialog',
     });
+    console.log('user in detail', this.user);
     dialog.componentInstance.user = new User(this.user.toJSON());
-    dialog.componentInstance.userId = this.user.id
+    dialog.componentInstance.id = this.id;
+    console.log('nach hinzufügen in component', this.user);
   }
 }
