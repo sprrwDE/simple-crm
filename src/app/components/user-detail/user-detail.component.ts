@@ -48,9 +48,16 @@ export class UserDetailComponent {
 
   ngOnInit() {
     this.fetchedSingleData$.subscribe((data) => {
+      console.log('data', data)
       this.user = new User(data)
-      console.log('blaaaasdadsada', this.user)
+      console.log('user', this.user)
     })
+  }
+
+  ngOnDestroy() {
+    if (this.routeSub) {
+      this.routeSub.unsubscribe();
+    }
   }
 
   openEditDialog() {
@@ -59,7 +66,7 @@ export class UserDetailComponent {
       maxWidth: '560px',
       panelClass: 'custom-dialog',
     });
-
     dialog.componentInstance.user = new User(this.user.toJSON());
+    dialog.componentInstance.userId = this.user.id
   }
 }

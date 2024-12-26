@@ -6,9 +6,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { User } from '../../models/user.class';
 import { FormsModule } from '@angular/forms';
-import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
+import { FirebaseService } from '../../services/firebase.service';
 
 @Component({
   selector: 'app-add-user-dialog',
@@ -29,23 +29,13 @@ import { CommonModule } from '@angular/common';
 export class AddUserDialogComponent {
   user: User = new User();
   birthDate!: Date;
-  loading: boolean = false;
 
-  constructor(private firestore: Firestore) {}
+  constructor(public service: FirebaseService) {}
 
   async saveUser() {
-    this.loading = true;
     if (this.user.birthDate) {
       this.user.birthDate = this.birthDate.getDate(); 
     }
-
-    try {
-      const userCollection = collection(this.firestore, 'users');
-      await addDoc(userCollection, this.user.toJSON());
-    } catch (error) {
-      console.error('Error saving user: ', error);
-    } finally {
-      this.loading = false;
-    }
+    this.service.saveDoc('users', this.user)
   }
 }

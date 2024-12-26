@@ -46,9 +46,6 @@ export class UserComponent {
             ...rawData,
           })
       );
-      // this.allUsers.length > 0 ? (this.loaded = true) : (this.loaded = false);
-      // Workaround -> bad, umschreiben
-      console.log('hello', this.allUsers);
     });
   }
 

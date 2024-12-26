@@ -14,6 +14,7 @@ import {
   doc,
   updateDoc
 } from '@angular/fire/firestore';
+import { FirebaseService } from '../../services/firebase.service';
 
 @Component({
   selector: 'app-edit-user-dialog',
@@ -32,15 +33,16 @@ import {
   styleUrl: './edit-user-dialog.component.scss',
 })
 export class EditUserDialogComponent {
-  user: User = new User();
+  user!: User;
+  userId!: string;
   birthDate!: Date;
   loading: boolean = false;
 
-  constructor(private firestore: Firestore) {
-    console.log(this.user.id);
+  constructor(private firestore: Firestore, public service: FirebaseService) {
+    console.log('user im dialog', this.user);
   }
 
-  getSingleUser() {
+/*   getSingleUser() {
     return doc(collection(this.firestore, 'users'), this.user.id);
   }
 
@@ -53,7 +55,7 @@ export class EditUserDialogComponent {
       .then(() => {
         this.loading = false;
       });
-  }
+  } */
 
 }
 

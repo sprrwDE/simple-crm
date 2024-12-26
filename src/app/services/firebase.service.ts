@@ -5,8 +5,10 @@ import {
   onSnapshot,
   doc,
   deleteDoc,
+  addDoc,
+  updateDoc,
+  DocumentData,
 } from '@angular/fire/firestore';
-import { DocumentData } from 'firebase/firestore';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -48,7 +50,6 @@ export class FirebaseService {
     onSnapshot(doc(this.firestore, db, id), (element) => {
       const fetchedData: DocumentData = { ...element.data() };
       this.fetchedSingleSubject.next(fetchedData);
-      console.log('uff', fetchedData);
       this.loaded = true;
     });
   }
@@ -61,5 +62,28 @@ export class FirebaseService {
     } catch (err) {
       console.error('Error deleting document:', err);
     }
+  }
+
+  async saveDoc(db: string, data: any) {
+    this.loaded = false;
+    try {
+      await addDoc(collection(this.firestore, db), data.toJSON());
+    } catch (error) {
+      console.error('Error saving user: ', error);
+    } finally {
+      this.loaded = true;
+    }
+  }
+
+  async editDoc(db: string, id: string, data: any) {
+    this.loaded = false;
+    console.log('Collection:', db, 'ID:', id);
+    await updateDoc(doc(collection(this.firestore, db), id), data.toJSON())
+      .catch((err) => {
+        console.error(err);
+      })
+      .then(() => {
+        this.loaded = true;
+      });
   }
 }

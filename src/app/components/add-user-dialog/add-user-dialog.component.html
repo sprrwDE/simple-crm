@@ -5,22 +5,22 @@
     <div class="input-wrapper">
       <mat-form-field appearance="fill">
         <mat-label>Vorname</mat-label>
-        <input [disabled]='loading' [(ngModel)]="user.firstName" matInput placeholder="Vorname" />
+        <input [disabled]='!service.loaded' [(ngModel)]="user.firstName" matInput placeholder="Vorname" />
       </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>Nachname</mat-label>
-        <input [disabled]='loading' [(ngModel)]="user.lastName" matInput placeholder="Nachname" />
+        <input [disabled]='!service.loaded' [(ngModel)]="user.lastName" matInput placeholder="Nachname" />
       </mat-form-field>
     </div>
     <div class="input-wrapper">
       <mat-form-field appearance="fill">
         <mat-label>E-Mail</mat-label>
-        <input [disabled]='loading' [(ngModel)]="user.email" matInput placeholder="E-Mail" />
+        <input [disabled]='!service.loaded' [(ngModel)]="user.email" matInput placeholder="E-Mail" />
       </mat-form-field>
       <mat-form-field class="w100">
         <mat-label>Choose a date</mat-label>
-        <input [disabled]='loading' matInput [(ngModel)]="birthDate" [matDatepicker]="picker" />
+        <input [disabled]='!service.loaded' matInput [(ngModel)]="birthDate" [matDatepicker]="picker" />
         <mat-datepicker-toggle
           matIconSuffix
           [for]="picker"
@@ -30,25 +30,25 @@
     </div>
     <mat-form-field appearance="fill">
       <mat-label>Address</mat-label>
-      <input [disabled]='loading' [(ngModel)]="user.street" matInput placeholder="Adresse" />
+      <input [disabled]='!service.loaded' [(ngModel)]="user.street" matInput placeholder="Adresse" />
     </mat-form-field>
     <div class="input-wrapper">
       <mat-form-field appearance="fill">
         <mat-label>Zip-Code</mat-label>
-        <input [disabled]='loading' [(ngModel)]="user.zip" matInput placeholder="Zip Code" />
+        <input [disabled]='!service.loaded' [(ngModel)]="user.zip" matInput placeholder="Zip Code" />
       </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>City</mat-label>
-        <input [disabled]='loading' [(ngModel)]="user.city" matInput placeholder="City" />
+        <input [disabled]='!service.loaded' [(ngModel)]="user.city" matInput placeholder="City" />
       </mat-form-field>
     </div>
 
     <mat-dialog-actions>
-      <button [disabled]='loading' mat-button mat-dialog-close>Abbrechen</button>
-      <button [disabled]='loading' (click)="saveUser()" mat-button mat-dialog-close cdkFocusInitial>Speichern</button>
+      <button [disabled]='!service.loaded' mat-button mat-dialog-close>Abbrechen</button>
+      <button [disabled]='!service.loaded' (click)="saveUser()" mat-button mat-dialog-close cdkFocusInitial>Speichern</button>
     </mat-dialog-actions>
   </mat-dialog-content>
-  <mat-progress-bar *ngIf="loading" class="progress" mode="indeterminate"></mat-progress-bar>
+  <mat-progress-bar *ngIf="!service.loaded" class="progress" mode="indeterminate"></mat-progress-bar>
 
 </div>
