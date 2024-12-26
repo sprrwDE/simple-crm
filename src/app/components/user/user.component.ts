@@ -7,15 +7,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import {
-  Firestore,
-  collection,
-  onSnapshot
-} from '@angular/fire/firestore';
-import { inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { User } from '../../models/user.class';
 import { RouterModule } from '@angular/router';
+import { Observable } from 'rxjs';
+import { FirebaseService } from '../../services/firebase.service';
 
 @Component({
   selector: 'app-user',
@@ -34,36 +30,27 @@ import { RouterModule } from '@angular/router';
   styleUrl: './user.component.scss',
 })
 export class UserComponent {
-  firestore:Firestore = inject(Firestore);
+  fetchedCollection$: Observable<any[]>;
   allUsers: User[] = [];
   loaded: boolean = false;
-  unsubscribe;
 
-  getUsers() {
-    return collection(this.firestore, 'users');
+  constructor(public dialog: MatDialog, private service: FirebaseService) {
+    this.fetchedCollection$ = this.service.fetchedCollection$;
+    service.getData('users');
   }
 
-  constructor(public dialog: MatDialog) {
-    try {
-      this.unsubscribe = onSnapshot(this.getUsers(), (list) => {
-        this.allUsers = [];
-        list.docs.forEach((element) => {
-          const rawData = element.data();
-          const user = new User({
+  ngOnInit() {
+    this.fetchedCollection$.subscribe((data) => {
+      this.allUsers = data.map(
+        (rawData) =>
+          new User({
             ...rawData,
-            id: element.id,
-          });
-          this.allUsers.push(user);
-          this.loaded = true;
-        });
-      });
-    } catch (error) {
-      console.error('error', error);
-    }
-  }
-
-  ngOnDestroy() {
-    if (this.unsubscribe) this.unsubscribe();
+          })
+      );
+      this.allUsers.length > 0 ? (this.loaded = true) : (this.loaded = false);
+      // Workaround -> bad, umschreiben
+      console.log('hello', this.allUsers);
+    });
   }
 
   openDialog() {
@@ -73,5 +60,4 @@ export class UserComponent {
       panelClass: 'custom-dialog',
     });
   }
-
 }
