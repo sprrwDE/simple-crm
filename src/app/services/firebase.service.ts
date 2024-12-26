@@ -27,7 +27,6 @@ export class FirebaseService {
           };
           fetchedData.push(rawData);
         });
-        console.log('blubbbbbb', fetchedData)
         this.fetchedCollectionSubject.next(fetchedData);
       });
     } catch (error) {
