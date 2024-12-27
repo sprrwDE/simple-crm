@@ -9,7 +9,7 @@ import {
   updateDoc,
   DocumentData,
 } from '@angular/fire/firestore';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -43,6 +43,20 @@ export class FirebaseService {
     } catch (error) {
       console.error('Fehler beim Abrufen der Daten:', error);
     }
+  }
+
+  getDataObservable(db: string): Observable<any[]> {
+    this.loaded = false;
+    return new Observable((observer) => {
+      onSnapshot(collection(this.firestore, db), (list) => {
+        const fetchedData: DocumentData[] = list.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        observer.next(fetchedData);
+        this.loaded = true;
+      });
+    });
   }
 
   getSingleDoc(db: string, id: string) {
