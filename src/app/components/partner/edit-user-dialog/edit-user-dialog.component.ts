@@ -7,8 +7,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { User } from '../../models/user.class';
-import { FirebaseService } from '../../services/firebase.service';
+import { User } from '../../../models/user.class';
+import { FirebaseService } from '../../../services/firebase.service';
 
 @Component({
   selector: 'app-edit-user-dialog',

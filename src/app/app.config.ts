@@ -4,7 +4,6 @@ import {
   MatNativeDateModule,
   provideNativeDateAdapter,
 } from '@angular/material/core';
-
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';

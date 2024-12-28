@@ -16,11 +16,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class FirebaseService {
   private fetchedCollectionSubject = new BehaviorSubject<DocumentData[]>([]);
-  fetchedCollection$ = this.fetchedCollectionSubject.asObservable();
-
   private fetchedSingleSubject = new BehaviorSubject<DocumentData>({});
+  fetchedCollection$ = this.fetchedCollectionSubject.asObservable();
   fetchedSingleData$ = this.fetchedSingleSubject.asObservable();
-
   public loaded: boolean = false;
 
   constructor(public firestore: Firestore) {}

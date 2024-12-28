@@ -2,15 +2,15 @@
   <mat-drawer #drawer class="sidenav" [opened]="true" mode="side">
     <div class="border">
       <a [routerLink]="'/dashboard'">
-<img
-        class="logo"
-        [src]="
-          isDarkTheme
-            ? '/assets/images/logo-white.png'
-            : '/assets/images/logo-black.png'
-        "
-        alt="Logo"
-      />
+        <img
+          class="logo"
+          [src]="
+            isDarkTheme
+              ? 'assets/images/logo-white.png'
+              : 'assets/images/logo-black.png'
+          "
+          alt="Logo"
+        />
       </a>
     </div>
     <ul>
@@ -21,9 +21,23 @@
         </a>
       </li>
       <li>
+        <a [routerLink]="'/customers/'" routerLinkActive="active">
+          <mat-icon>favorite</mat-icon>
+          Kunden
+        </a>
+      </li>
+
+
+      <li>
+        <a [routerLink]="'/leads/'" routerLinkActive="active">
+          <mat-icon>rocket_launch</mat-icon>
+          Leads
+        </a>
+      </li>
+      <li>
         <a [routerLink]="'/user'" routerLinkActive="active">
           <mat-icon>perm_identity</mat-icon>
-          User
+          Partner
         </a>
       </li>
     </ul>

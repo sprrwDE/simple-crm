@@ -6,13 +6,13 @@ import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { User } from '../../models/user.class';
+import { User } from '../../../models/user.class';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { EditUserDialogComponent } from '../edit-user-dialog/edit-user-dialog.component';
+import { EditUserDialogComponent } from '../../partner/edit-user-dialog/edit-user-dialog.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
-import { FirebaseService } from '../../services/firebase.service';
+import { FirebaseService } from '../../../services/firebase.service';
 
 @Component({
   selector: 'app-user-detail',

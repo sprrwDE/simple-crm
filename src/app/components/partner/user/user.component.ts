@@ -8,10 +8,10 @@ import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.compo
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
-import { User } from '../../models/user.class';
+import { User } from '../../../models/user.class';
 import { RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
-import { FirebaseService } from '../../services/firebase.service';
+import { FirebaseService } from '../../../services/firebase.service';
 
 @Component({
   selector: 'app-user',
