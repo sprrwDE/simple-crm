@@ -6,7 +6,8 @@
 
   <div class="inner">
     <mat-card class="content1">
-      <h2>Adresse</h2>
+      <h2>Kontakt</h2>
+      <p>{{ user.firstName }} {{ user.lastName }}</p>
       <p>{{ user.street }}</p>
       <p>{{ user.zip }} {{ user.city }}</p>
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" class="menu-icon">

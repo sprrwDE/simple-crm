@@ -68,10 +68,8 @@ export class FirebaseService {
 
   async deleteSingleDoc(db: string, id: string) {
     try {
-      console.log(db)
       const docRef = doc(this.firestore, db, id);
       await deleteDoc(docRef);
-      console.log('Document successfully deleted!');
     } catch (err) {
       console.error('Error deleting document:', err);
     }
