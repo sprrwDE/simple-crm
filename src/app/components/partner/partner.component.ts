@@ -4,19 +4,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
-import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
+import { AddUserDialogComponent } from '../user/add-user-dialog/add-user-dialog.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
-import { User } from '../../../models/user.class';
+import { User } from '../../models/user.class';
 import { RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
-import { FirebaseService } from '../../../services/firebase.service';
+import { FirebaseService } from '../../services/firebase.service';
 import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
-  selector: 'app-user',
+  selector: 'app-partner',
   standalone: true,
   imports: [
     MatIconModule,
@@ -28,10 +28,11 @@ import { ActivatedRoute } from '@angular/router';
     RouterModule,
     MatProgressSpinnerModule
   ],
-  templateUrl: './user.component.html',
-  styleUrl: './user.component.scss',
+  templateUrl: './partner.component.html',
+  styleUrl: './partner.component.scss'
 })
-export class UserComponent {
+export class PartnerComponent {
+
   fetchedCollection$: Observable<any[]>;
   allUsers: User[] = [];
 

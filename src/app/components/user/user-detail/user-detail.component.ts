@@ -9,11 +9,11 @@ import { Observable } from 'rxjs';
 import { User } from '../../../models/user.class';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { EditUserDialogComponent } from '../../partner/edit-user-dialog/edit-user-dialog.component';
+import { EditUserDialogComponent } from '../../user/edit-user-dialog/edit-user-dialog.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { FirebaseService } from '../../../services/firebase.service';
-import { Router, NavigationEnd } from '@angular/router'
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-user-detail',
@@ -36,7 +36,7 @@ export class UserDetailComponent {
   id: string = '';
   type!: string;
   status: string = '';
-  displayedStatus: string = ''
+  displayedStatus: string = '';
   user!: User;
   fetchedSingleData$: Observable<any>;
 
@@ -46,10 +46,12 @@ export class UserDetailComponent {
     public service: FirebaseService,
     private router: Router
   ) {
-    this.router.events.subscribe((path) => { path instanceof NavigationEnd ? this.getPath(path.url): null })
+    this.router.events.subscribe((path) => {
+      path instanceof NavigationEnd ? this.getPath(path.url) : null;
+    });
     this.route.params.subscribe((params) => {
-      this.type = params['type']; 
-      console.log(this.type)
+      this.type = params['type'];
+      console.log(this.type);
       this.id = params['id'];
     });
 
@@ -63,12 +65,12 @@ export class UserDetailComponent {
     });
   }
 
-  performActions(s:string, d:string) {
-    this.user.status = s
+  performActions(s: string, d: string) {
+    this.user.status = s;
     this.service.saveDoc(s, this.user);
     this.service.deleteSingleDoc(d, this.id);
   }
-  
+
   getPath(path: string) {
     this.status = path.split('/')[1];
   }
@@ -82,5 +84,4 @@ export class UserDetailComponent {
     dialog.componentInstance.user = new User(this.user.toJSON());
     dialog.componentInstance.id = this.id;
   }
-
 }

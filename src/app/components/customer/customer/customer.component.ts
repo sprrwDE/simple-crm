@@ -11,7 +11,7 @@ import { User } from '../../../models/user.class';
 import { RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FirebaseService } from '../../../services/firebase.service';
-import { AddUserDialogComponent } from '../../partner/add-user-dialog/add-user-dialog.component';
+import { AddUserDialogComponent } from '../../user/add-user-dialog/add-user-dialog.component';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
