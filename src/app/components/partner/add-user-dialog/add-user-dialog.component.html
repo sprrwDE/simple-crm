@@ -2,30 +2,21 @@
   <mat-dialog-content class="dialog-content-wrapper">
     <h2 mat-dialog-title>Nutzer hinzufügen</h2>
 
-    <mat-form-field>
-      <mat-label>Kontakt Stauts</mat-label>
-      <mat-select [(ngModel)]="user.status">
-        <mat-option value="users">Partner</mat-option>
-        <mat-option value="leads">Lead</mat-option>
-        <mat-option value="customers">Customer</mat-option>
-      </mat-select>
-    </mat-form-field>
-
     <div class="input-wrapper">
       <mat-form-field appearance="fill">
         <mat-label>Vorname</mat-label>
-        <input [disabled]='!service.loaded' [(ngModel)]="user.firstName" matInput placeholder="Vorname" />
+        <input [required]="true"  [disabled]='!service.loaded' [(ngModel)]="user.firstName" matInput placeholder="Vorname" />
       </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>Nachname</mat-label>
-        <input [disabled]='!service.loaded' [(ngModel)]="user.lastName" matInput placeholder="Nachname" />
+        <input [required]="true"  [disabled]='!service.loaded' [(ngModel)]="user.lastName" matInput placeholder="Nachname" />
       </mat-form-field>
     </div>
     <div class="input-wrapper">
       <mat-form-field appearance="fill">
         <mat-label>E-Mail</mat-label>
-        <input [disabled]='!service.loaded' [(ngModel)]="user.email" matInput placeholder="E-Mail" />
+        <input [required]="true"  [disabled]='!service.loaded' [(ngModel)]="user.email" matInput placeholder="E-Mail" />
       </mat-form-field>
       <mat-form-field class="w100">
         <mat-label>Choose a date</mat-label>
@@ -49,7 +40,7 @@
 
       <mat-form-field appearance="fill">
         <mat-label>City</mat-label>
-        <input [disabled]='!service.loaded' [(ngModel)]="user.city" matInput placeholder="City" />
+        <input [required]="true"  [disabled]='!service.loaded' [(ngModel)]="user.city" matInput placeholder="City" />
       </mat-form-field>
 
     </div>

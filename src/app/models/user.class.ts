@@ -7,8 +7,8 @@ export class User {
   zip!: number;
   city!: string;
   id!: string;
-  status: 'partner' | 'customer' | 'lead' | '';
-
+  status: string;
+  
   constructor(obj?: any) {
     this.firstName = obj ? obj.firstName : '';
     this.lastName = obj ? obj.lastName : '';

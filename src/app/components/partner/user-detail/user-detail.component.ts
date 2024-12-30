@@ -32,7 +32,6 @@ import { FirebaseService } from '../../../services/firebase.service';
   styleUrl: './user-detail.component.scss',
 })
 export class UserDetailComponent {
-  // routeSub: Subscription;
   id: string = '';
   type!: string;
   status: string = '';
@@ -45,7 +44,7 @@ export class UserDetailComponent {
     public service: FirebaseService
   ) {
     this.route.params.subscribe((params) => {
-      this.type = params['type']; // Kann "user", "customers" oder "leads" sein
+      this.type = params['type']; 
       this.id = params['id'];
     });
 
@@ -59,11 +58,11 @@ export class UserDetailComponent {
     });
   }
 
-/*   ngOnDestroy() {
-    if (this.routeSub) {
-      this.routeSub.unsubscribe();
-    }
-  } */
+  performActions(s:string, d:string) {
+    this.service.saveDoc(s, this.user);
+    this.service.deleteSingleDoc(d, this.id);
+  }
+  
 
   openEditDialog() {
     const dialog = this.dialog.open(EditUserDialogComponent, {

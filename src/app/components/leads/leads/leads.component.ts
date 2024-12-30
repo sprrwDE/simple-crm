@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
-// import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
+import { ActivatedRoute } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
@@ -33,7 +33,7 @@ export class LeadsComponent {
   fetchedCollection$: Observable<any[]>;
   allUsers: User[] = [];
 
-  constructor(public dialog: MatDialog, public service: FirebaseService) {
+  constructor(public dialog: MatDialog, public service: FirebaseService, private route: ActivatedRoute) {
     this.fetchedCollection$ = this.service.fetchedCollection$;
     service.getData('leads');
   }
@@ -50,10 +50,12 @@ export class LeadsComponent {
   }
 
 openDialog() {
+  const currentPath = this.route.snapshot.url.map((segment) => segment.path).join('/');
     this.dialog.open(AddUserDialogComponent, {
       width: '100%',
       maxWidth: '560px',
       panelClass: 'custom-dialog',
+      data: { status: currentPath }, 
     });
   }
 }

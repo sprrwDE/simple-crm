@@ -1,55 +1,114 @@
 <div>
-    <mat-dialog-content class="dialog-content-wrapper">
-      <h2 mat-dialog-title>Nutzer editieren</h2>
-  
-      <div class="input-wrapper">
-        <mat-form-field appearance="fill">
-          <mat-label>Vorname</mat-label>
-          <input [disabled]='!service.loaded' [(ngModel)]="user.firstName" matInput placeholder="Vorname" value="user.firstName"/>
-        </mat-form-field>
-  
-        <mat-form-field appearance="fill">
-          <mat-label>Nachname</mat-label>
-          <input [disabled]='!service.loaded' [(ngModel)]="user.lastName" matInput placeholder="Nachname" value="user.lastName"/>
-        </mat-form-field>
-      </div>
-      <div class="input-wrapper">
-        <mat-form-field appearance="fill">
-          <mat-label>E-Mail</mat-label>
-          <input [disabled]='!service.loaded' [(ngModel)]="user.email" matInput placeholder="E-Mail" value="user.email"/>
-        </mat-form-field>
-        <mat-form-field class="w100">
-          <mat-label>Choose a date</mat-label>
-          <input [disabled]='!service.loaded' matInput [(ngModel)]="birthDate" [matDatepicker]="picker" value="user.birthDate"/>
-          <mat-datepicker-toggle
-            matIconSuffix
-            [for]="picker"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-      </div>
+  <mat-dialog-content class="dialog-content-wrapper">
+    <h2 mat-dialog-title>Nutzer editieren</h2>
+
+
+    <div class="input-wrapper">
       <mat-form-field appearance="fill">
-        <mat-label>Address</mat-label>
-        <input [disabled]='!service.loaded' [(ngModel)]="user.street" matInput placeholder="Adresse" value="user.street"/>
+        <mat-label>Vorname</mat-label>
+        <input
+          [required]="true"
+          [disabled]="!service.loaded"
+          [(ngModel)]="user.firstName"
+          matInput
+          placeholder="Vorname"
+          value="user.firstName"
+        />
       </mat-form-field>
-      <div class="input-wrapper">
-        <mat-form-field appearance="fill">
-          <mat-label>Zip-Code</mat-label>
-          <input [disabled]='!service.loaded' [(ngModel)]="user.zip" matInput placeholder="Zip Code" value="user.zip"/>
-        </mat-form-field>
-  
-        <mat-form-field appearance="fill">
-          <mat-label>City</mat-label>
-          <input [disabled]='!service.loaded' [(ngModel)]="user.city" matInput placeholder="City" value="user.city"/>
-        </mat-form-field>
-      </div>
-  
-      <mat-dialog-actions>
-        <button [disabled]='!service.loaded' mat-button mat-dialog-close>Abbrechen</button>
-        <button [disabled]='!service.loaded' (click)="service.editDoc('users', id, user)" mat-button mat-dialog-close cdkFocusInitial>Speichern</button>
-      </mat-dialog-actions>
-    </mat-dialog-content>
-    <mat-progress-bar *ngIf="!service.loaded" class="progress" mode="indeterminate"></mat-progress-bar>
-  
-  </div>
-  
+
+      <mat-form-field appearance="fill">
+        <mat-label>Nachname</mat-label>
+        <input
+          [required]="true"
+          [disabled]="!service.loaded"
+          [(ngModel)]="user.lastName"
+          matInput
+          placeholder="Nachname"
+          value="user.lastName"
+        />
+      </mat-form-field>
+    </div>
+    <div class="input-wrapper">
+      <mat-form-field appearance="fill">
+        <mat-label>E-Mail</mat-label>
+        <input
+          [required]="true"
+          [disabled]="!service.loaded"
+          [(ngModel)]="user.email"
+          matInput
+          placeholder="E-Mail"
+          value="user.email"
+        />
+      </mat-form-field>
+      <mat-form-field class="w100">
+        <mat-label>Choose a date</mat-label>
+        <input
+          [disabled]="!service.loaded"
+          matInput
+          [(ngModel)]="birthDate"
+          [matDatepicker]="picker"
+          value="user.birthDate"
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <mat-form-field appearance="fill">
+      <mat-label>Address</mat-label>
+      <input
+        [disabled]="!service.loaded"
+        [(ngModel)]="user.street"
+        matInput
+        placeholder="Adresse"
+        value="user.street"
+      />
+    </mat-form-field>
+    <div class="input-wrapper">
+      <mat-form-field appearance="fill">
+        <mat-label>Zip-Code</mat-label>
+        <input
+          [disabled]="!service.loaded"
+          [(ngModel)]="user.zip"
+          matInput
+          placeholder="Zip Code"
+          value="user.zip"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>City</mat-label>
+        <input
+          [required]="true"
+          [disabled]="!service.loaded"
+          [(ngModel)]="user.city"
+          matInput
+          placeholder="City"
+          value="user.city"
+        />
+      </mat-form-field>
+    </div>
+
+    <mat-dialog-actions>
+      <button [disabled]="!service.loaded" mat-button mat-dialog-close>
+        Abbrechen
+      </button>
+      <button
+        [disabled]="!service.loaded"
+        (click)="service.editDoc(user.status, id, user)"
+        mat-button
+        mat-dialog-close
+        cdkFocusInitial
+      >
+        Speichern
+      </button>
+    </mat-dialog-actions>
+  </mat-dialog-content>
+  <mat-progress-bar
+    *ngIf="!service.loaded"
+    class="progress"
+    mode="indeterminate"
+  ></mat-progress-bar>
+</div>

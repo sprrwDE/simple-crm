@@ -8,7 +8,7 @@ import { CustomerComponent } from './components/customer/customer/customer.compo
 export const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'user', component: UserComponent },
+  { path: 'users', component: UserComponent },
   { path: 'leads', component: LeadsComponent },
   { path: 'customers', component: CustomerComponent },
   { path: ':type/:id', component: UserDetailComponent },

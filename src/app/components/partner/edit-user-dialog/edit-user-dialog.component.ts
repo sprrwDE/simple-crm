@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { User } from '../../../models/user.class';
 import { FirebaseService } from '../../../services/firebase.service';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-edit-user-dialog',
@@ -22,16 +23,19 @@ import { FirebaseService } from '../../../services/firebase.service';
     FormsModule,
     MatProgressBarModule,
     CommonModule,
+    MatSelectModule
   ],
   templateUrl: './edit-user-dialog.component.html',
   styleUrl: './edit-user-dialog.component.scss',
 })
 export class EditUserDialogComponent {
   user!: User;
+  status!: string;
   id!: string;
   birthDate!: Date;
   loading: boolean = false;
 
   constructor(public service: FirebaseService) {
   }
+
 }
