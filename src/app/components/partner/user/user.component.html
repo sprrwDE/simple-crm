@@ -7,7 +7,7 @@
           <th>E-Mail</th>
           <th>City</th>
         </tr>
-        <tr *ngFor="let user of allUsers" [routerLink]="'/user/' + user.id">
+        <tr *ngFor="let user of allUsers" [routerLink]="'/users/' + user.id">
           <td>{{ user.firstName}}</td>
           <td><a href="mailto:{{ user.email}}">{{ user.email}}</a></td>
           <td>{{ user.city}}</td>

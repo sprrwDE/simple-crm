@@ -32,8 +32,10 @@ import { FirebaseService } from '../../../services/firebase.service';
   styleUrl: './user-detail.component.scss',
 })
 export class UserDetailComponent {
-  routeSub: Subscription;
+  // routeSub: Subscription;
   id: string = '';
+  type!: string;
+  status: string = '';
   user!: User;
   fetchedSingleData$: Observable<any>;
 
@@ -42,11 +44,13 @@ export class UserDetailComponent {
     public dialog: MatDialog,
     public service: FirebaseService
   ) {
-    this.routeSub = this.route.params.subscribe((params) => {
+    this.route.params.subscribe((params) => {
+      this.type = params['type']; // Kann "user", "customers" oder "leads" sein
       this.id = params['id'];
     });
+
     this.fetchedSingleData$ = this.service.fetchedSingleData$;
-    service.getSingleDoc('users', this.id);
+    service.getSingleDoc(this.type, this.id);
   }
 
   ngOnInit() {
@@ -55,11 +59,11 @@ export class UserDetailComponent {
     });
   }
 
-  ngOnDestroy() {
+/*   ngOnDestroy() {
     if (this.routeSub) {
       this.routeSub.unsubscribe();
     }
-  }
+  } */
 
   openEditDialog() {
     const dialog = this.dialog.open(EditUserDialogComponent, {

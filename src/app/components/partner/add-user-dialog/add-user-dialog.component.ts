@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
 import { FirebaseService } from '../../../services/firebase.service';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-add-user-dialog',
@@ -23,7 +23,7 @@ import {MatSelectModule} from '@angular/material/select';
     FormsModule,
     MatProgressBarModule,
     CommonModule,
-    MatSelectModule
+    MatSelectModule,
   ],
   templateUrl: './add-user-dialog.component.html',
   styleUrl: './add-user-dialog.component.scss',
@@ -31,14 +31,17 @@ import {MatSelectModule} from '@angular/material/select';
 export class AddUserDialogComponent {
   user: User = new User();
   birthDate!: Date;
+  status!: string;
 
   constructor(public service: FirebaseService) {}
 
   async saveUser() {
     if (this.user.birthDate) {
-      this.user.birthDate = this.birthDate.getDate(); 
+      this.user.birthDate = this.birthDate.getDate();
     }
-    let status = this.user.status
-    this.service.saveDoc(status, this.user)
+    if (this.user.status) {
+      this.status = this.user.status;
+    }
+    this.service.saveDoc(this.status, this.user);
   }
 }

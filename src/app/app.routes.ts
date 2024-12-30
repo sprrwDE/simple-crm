@@ -6,10 +6,10 @@ import { LeadsComponent } from './components/leads/leads/leads.component';
 import { CustomerComponent } from './components/customer/customer/customer.component';
 
 export const routes: Routes = [
-    {path: '', component: DashboardComponent},
-    {path: 'dashboard', component: DashboardComponent},
-    {path: 'user', component: UserComponent},
-    {path: 'leads', component: LeadsComponent},
-    {path: 'customers', component: CustomerComponent},
-    {path: 'user/:id', component: UserDetailComponent}
+  { path: '', component: DashboardComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'user', component: UserComponent },
+  { path: 'leads', component: LeadsComponent },
+  { path: 'customers', component: CustomerComponent },
+  { path: ':type/:id', component: UserDetailComponent },
 ];

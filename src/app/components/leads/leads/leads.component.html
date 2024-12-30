@@ -7,7 +7,7 @@
             <th>E-Mail</th>
             <th>City</th>
           </tr>
-          <tr *ngFor="let user of allUsers" [routerLink]="'/user/' + user.id">
+          <tr *ngFor="let user of allUsers" [routerLink]="'/leads/' + user.id">
             <td>{{ user.firstName}}</td>
             <td><a href="mailto:{{ user.email}}">{{ user.email}}</a></td>
             <td>{{ user.city}}</td>
@@ -19,7 +19,7 @@
   
   <mat-spinner *ngIf="!service.loaded" class="center"></mat-spinner>
   
-<!--   <button
+ <button
     mat-fab
     color="primary"
     class="fab"
@@ -28,6 +28,5 @@
     (click)="openDialog()"
   >
     <mat-icon>add</mat-icon>
-  </button> -->
-  
+  </button> 
   

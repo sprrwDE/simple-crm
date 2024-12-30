@@ -12,6 +12,8 @@ import { User } from '../../../models/user.class';
 import { RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FirebaseService } from '../../../services/firebase.service';
+import { AddUserDialogComponent } from '../../partner/add-user-dialog/add-user-dialog.component';
+
 @Component({
   selector: 'app-leads',
   standalone: true,
@@ -47,11 +49,11 @@ export class LeadsComponent {
     });
   }
 
-/*   openDialog() {
+openDialog() {
     this.dialog.open(AddUserDialogComponent, {
       width: '100%',
       maxWidth: '560px',
       panelClass: 'custom-dialog',
     });
-  } */
+  }
 }
