@@ -18,7 +18,7 @@
           <mat-icon>edit</mat-icon>
           <span>Edit User</span>
         </button>
-        <button mat-menu-item (click)="service.deleteSingleDoc(user.status, this.id)" [routerLink]="['/', user.status,]"
+        <button mat-menu-item (click)="service.deleteSingleDoc(user.status, this.id)" [routerLink]="['/', user.status]"
         >
           <mat-icon>delete</mat-icon>
           <span>Delete User</span>
@@ -60,7 +60,7 @@
       class="fab"
       matTooltip="Zur Übersicht"
       matTooltipPosition="above"
-      [routerLink]="'user'"
+      [routerLink]="['/', user.status]"
     >
       <mat-icon>arrow_back</mat-icon>
     </button>

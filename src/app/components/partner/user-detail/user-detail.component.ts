@@ -5,7 +5,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { User } from '../../../models/user.class';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -13,6 +13,7 @@ import { EditUserDialogComponent } from '../../partner/edit-user-dialog/edit-use
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { FirebaseService } from '../../../services/firebase.service';
+import { Router, NavigationEnd } from '@angular/router'
 
 @Component({
   selector: 'app-user-detail',
@@ -42,10 +43,13 @@ export class UserDetailComponent {
   constructor(
     private route: ActivatedRoute,
     public dialog: MatDialog,
-    public service: FirebaseService
+    public service: FirebaseService,
+    private router: Router
   ) {
+    this.router.events.subscribe((path) => { path instanceof NavigationEnd ? this.getPath(path.url): null })
     this.route.params.subscribe((params) => {
       this.type = params['type']; 
+      console.log(this.type)
       this.id = params['id'];
     });
 
@@ -65,6 +69,9 @@ export class UserDetailComponent {
     this.service.deleteSingleDoc(d, this.id);
   }
   
+  getPath(path: string) {
+    this.status = path.split('/')[1];
+  }
 
   openEditDialog() {
     const dialog = this.dialog.open(EditUserDialogComponent, {
@@ -75,4 +82,5 @@ export class UserDetailComponent {
     dialog.componentInstance.user = new User(this.user.toJSON());
     dialog.componentInstance.id = this.id;
   }
+
 }

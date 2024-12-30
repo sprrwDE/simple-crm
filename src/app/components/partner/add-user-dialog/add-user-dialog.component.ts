@@ -39,8 +39,6 @@ export class AddUserDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: { status: string }
   ) {
     this.user.status = data.status;
-    console.log('Status gesetzt:', this.user.status);
-
   }
 
   async saveUser() {
