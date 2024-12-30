@@ -17,7 +17,8 @@
           <mat-icon>edit</mat-icon>
           <span>Edit User</span>
         </button>
-        <button mat-menu-item (click)="service.deleteSingleDoc(user.status, this.id)" [routerLink]="'/users/'">
+        <button mat-menu-item (click)="service.deleteSingleDoc(user.status, this.id)" [routerLink]="['/', user.status,]"
+        >
           <mat-icon>delete</mat-icon>
           <span>Delete User</span>
         </button>
@@ -25,22 +26,25 @@
         mat-menu-item 
         *ngIf="user.status != 'leads'"
         (click)="performActions('leads', user.status)" 
-        [routerLink]="'/leads/'">
+        [routerLink]="'/leads'">
+        <mat-icon>rocket_launch</mat-icon>
         Move to Leads
       </button>
       <button 
       *ngIf="user.status != 'users'"
       mat-menu-item 
       (click)="performActions('users', user.status)" 
-      [routerLink]="'/users/'">
-      Move to Partner
+      [routerLink]="'/users'">
+      <mat-icon>perm_identity</mat-icon>
+      Move to Partners
     </button>
     <button 
     mat-menu-item 
     *ngIf="user.status != 'customers'"
     (click)="performActions('customers', user.status)" 
-    [routerLink]="'/customers/'">
-    Move to customer
+    [routerLink]="'/customers'">
+    <mat-icon>favorite</mat-icon>
+    Move to Customers
   </button>
       
       </mat-menu>

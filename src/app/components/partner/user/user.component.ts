@@ -9,7 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonModule } from '@angular/common';
 import { User } from '../../../models/user.class';
-import { Route, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FirebaseService } from '../../../services/firebase.service';
 import { ActivatedRoute } from '@angular/router';

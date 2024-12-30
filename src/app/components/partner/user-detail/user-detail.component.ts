@@ -59,6 +59,11 @@ export class UserDetailComponent {
   }
 
   performActions(s:string, d:string) {
+    console.log('save to:', s)
+    console.log('delete from:', d)
+    console.log(this.user)
+    this.user.status = s
+    console.log(this.user)
     this.service.saveDoc(s, this.user);
     this.service.deleteSingleDoc(d, this.id);
   }
