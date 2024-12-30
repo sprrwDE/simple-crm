@@ -45,6 +45,7 @@ Thumbs.db
 .firebase
 *-debug.log
 .runtimeconfig.json
+src/environments
 
 # Stuff to do
 /todo
