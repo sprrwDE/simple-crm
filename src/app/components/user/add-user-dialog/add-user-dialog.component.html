@@ -2,6 +2,7 @@
   <mat-dialog-content class="dialog-content-wrapper">
     <h2 mat-dialog-title>Nutzer hinzufügen</h2>
 
+    <form>
     <div class="input-wrapper">
       <mat-form-field appearance="fill">
         <mat-label>Vorname</mat-label>
@@ -50,6 +51,7 @@
       <button [disabled]='!service.loaded' mat-button mat-dialog-close>Abbrechen</button>
       <button [disabled]='!service.loaded' (click)="saveUser()" mat-button mat-dialog-close cdkFocusInitial>Speichern</button>
     </mat-dialog-actions>
+  </form>
   </mat-dialog-content>
   <mat-progress-bar *ngIf="!service.loaded" class="progress" mode="indeterminate"></mat-progress-bar>
 

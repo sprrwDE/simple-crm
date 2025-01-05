@@ -10,18 +10,21 @@
     > h2 {
       text-align: center;
     }
-    > .input-wrapper {
-      display: flex;
-      flex-direction: row;
-      gap: 8px;
-      width: 100%;
+
+
+      > .input-wrapper {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        width: 100%;
+      }
     }
     .progress {
       position: absolute;
       bottom: 0px;
       z-index: 10000;
     }
-  }
+  
   
   .custom-dialog {
     padding: 8px;
